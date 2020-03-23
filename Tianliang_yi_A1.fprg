@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="2.11">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="DEMOND_HUNTER"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2018-08-29 04:57:19 PM"/>
+        <attribute name="created" value="REVNT05EX0hVTlRFUjtMQVBUT1AtNlRNRUw2RVE7MjAxOC0wOC0xNDsxMTo1Njo1NSBBTTszMzUz"/>
+        <attribute name="edited" value="REVNT05EX0hVTlRFUjtMQVBUT1AtNlRNRUw2RVE7MjAxOC0wOC0yOTswNDo1NzoxOSBQTTsxMTU7MzU4Nw=="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="name" type="String" array="False" size=""/>
+            <declare name="Userseat" type="String" array="False" size=""/>
+            <assign variable="name" expression="menu()"/>
+            <declare name="userchoose" type="String" array="False" size=""/>
+            <declare name="Userfare" type="String" array="False" size=""/>
+            <input variable="userchoose"/>
+            <while expression="userchoose !=&quot;E&quot; and userchoose !=&quot;e&quot; and userchoose !=&quot;I&quot; and userchoose !=&quot;i&quot; and userchoose !=&quot;O&quot; and userchoose !=&quot;o&quot;">
+                <output expression="&quot;Please put into E(e) I(i) or O(o)&quot;" newline="True"/>
+                <input variable="userchoose"/>
+            </while>
+            <if expression="userchoose==&quot;E&quot; or userchoose==&quot;e&quot;">
+                <then>
+                    <output expression="&quot;Thank you for visiting Tropical Airlines&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="userchoose==&quot;I&quot;or userchoose==&quot;i&quot;">
+                        <then>
+                            <output expression="&quot;Thank you for choosing Tropical Airlines for your air travel needs. You will be asked questions regarding what type of ticket you would like to purchase as well as destination information. We also offer 50% discounted fares for children.&quot;" newline="True"/>
+                            <assign variable="name" expression="doublecheck(name)"/>
+                        </then>
+                        <else>
+                            <if expression="userchoose==&quot;O&quot; or userchoose==&quot;o&quot;">
+                                <then>
+                                    <assign variable="name" expression="doublecheck(name)"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </else>
+                    </if>
+                    <declare name="cost" type="Integer" array="False" size=""/>
+                    <assign variable="userchoose" expression="destination()"/>
+                    <assign variable="cost" expression="Costdestination(userchoose)"/>
+                    <declare name="seat" type="Integer" array="False" size=""/>
+                    <assign variable="Userseat" expression="seat()"/>
+                    <assign variable="seat" expression="Costseat(Userseat)"/>
+                    <declare name="fare" type="Integer" array="False" size=""/>
+                    <assign variable="Userfare" expression="fare()"/>
+                    <assign variable="fare" expression="Costfare(Userfare)"/>
+                    <declare name="age" type="Real" array="False" size=""/>
+                    <assign variable="age" expression="age()"/>
+                    <declare name="Totalprice" type="Integer" array="False" size=""/>
+                    <assign variable="Totalprice" expression="(cost+seat+fare)*age"/>
+                    <output expression="&quot;Hello &quot; &amp; name &amp; &quot;. Your are going to ordering: &quot; &amp; userchoose &amp; &quot; , &quot; &amp; Userseat &amp; &quot; and &quot; &amp; Userfare" newline="True"/>
+                    <output expression="&quot;In addition, the total price is: &quot; &amp; Totalprice" newline="True"/>
+                    <output expression="&quot;Do you want ot order one more tickets? (Y or N)&quot;" newline="True"/>
+                    <input variable="userchoose"/>
+                    <while expression="userchoose!=&quot;Y&quot; and userchoose !=&quot;y&quot; and userchoose !=&quot;N&quot; and userchoose !=&quot;n&quot;">
+                        <output expression="&quot;Please put into 'Y' or 'N'.&quot;" newline="True"/>
+                        <input variable="userchoose"/>
+                    </while>
+                    <if expression="userchoose==&quot;y&quot; or userchoose==&quot;Y&quot;">
+                        <then>
+                            <call expression="main()"/>
+                        </then>
+                        <else>
+                            <output expression="&quot;Thanks for your odering with Tropical Airlines&quot;" newline="True"/>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="age" type="Real" variable="age">
+        <parameters/>
+        <body>
+            <declare name="userage" type="Integer" array="False" size=""/>
+            <output expression="&quot;How old is the person travelling. Travellers under 16 years old will receive a 50% discount for the child fare.&quot;" newline="True"/>
+            <output expression="&quot;Please put into yout real age:  &quot;" newline="True"/>
+            <input variable="userage"/>
+            <declare name="age" type="Real" array="False" size=""/>
+            <if expression="userage&lt;= 16">
+                <then>
+                    <output expression="&quot;You age are: &quot;&amp; userage &amp;&quot;. Your age are under the 16 years old. Half price.&quot;" newline="True"/>
+                    <assign variable="age" expression="0.5"/>
+                </then>
+                <else>
+                    <output expression="&quot;You age are: &quot; &amp; userage &amp; &quot;. Your age are beyond the 16 years old. Normal price.&quot;" newline="True"/>
+                    <assign variable="age" expression="1"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Costdestination" type="Integer" variable="cost">
+        <parameters>
+            <parameter name="userchoose" type="String" array="False"/>
+        </parameters>
+        <body>
+            <declare name="userdestination" type="String" array="False" size=""/>
+            <declare name="cost" type="Integer" array="False" size=""/>
+            <assign variable="userdestination" expression="userchoose"/>
+            <if expression="userdestination==&quot;Carms One Way&quot;">
+                <then>
+                    <assign variable="cost" expression="250"/>
+                </then>
+                <else>
+                    <if expression="userdestination==&quot;Carms Return&quot;">
+                        <then>
+                            <assign variable="cost" expression="400"/>
+                        </then>
+                        <else>
+                            <if expression="userdestination==&quot;Sydney One Way&quot;">
+                                <then>
+                                    <assign variable="cost" expression="420"/>
+                                </then>
+                                <else>
+                                    <if expression="userdestination==&quot;Sydney Return&quot;">
+                                        <then>
+                                            <assign variable="cost" expression="575"/>
+                                        </then>
+                                        <else>
+                                            <if expression="userdestination==&quot;Perth One Way&quot;">
+                                                <then>
+                                                    <assign variable="cost" expression="510"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="userdestination==&quot;Perth Return&quot;">
+                                                        <then>
+                                                            <assign variable="cost" expression="700"/>
+                                                        </then>
+                                                        <else/>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Costfare" type="Integer" variable="fare">
+        <parameters>
+            <parameter name="Userfare" type="String" array="False"/>
+        </parameters>
+        <body>
+            <declare name="fare" type="Integer" array="False" size=""/>
+            <assign variable="userfare" expression="Userfare"/>
+            <if expression="userfare==&quot;Business Fare&quot;">
+                <then>
+                    <assign variable="fare" expression="275"/>
+                </then>
+                <else>
+                    <if expression="userfare==&quot;Economy Fare&quot;">
+                        <then>
+                            <assign variable="fare" expression="25"/>
+                        </then>
+                        <else>
+                            <if expression="userfare==&quot;Frugal Fare&quot;">
+                                <then>
+                                    <assign variable="fare" expression="0"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="Costseat" type="Integer" variable="seat">
+        <parameters>
+            <parameter name="Userseat" type="String" array="False"/>
+        </parameters>
+        <body>
+            <assign variable="userseat" expression="Userseat"/>
+            <declare name="seat" type="Integer" array="False" size=""/>
+            <if expression="Userseat==&quot;Window Seat&quot;">
+                <then>
+                    <assign variable="seat" expression="75"/>
+                </then>
+                <else>
+                    <if expression="Userseat==&quot;Aisle Seat&quot;">
+                        <then>
+                            <assign variable="seat" expression="50"/>
+                        </then>
+                        <else>
+                            <if expression="Userseat==&quot;Middle Seat&quot;">
+                                <then>
+                                    <assign variable="seat" expression="25"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="destination" type="String" variable="userchoose">
+        <parameters/>
+        <body>
+            <declare name="userdestination" type="String" array="False" size=""/>
+            <declare name="userchoose" type="String" array="False" size=""/>
+            <output expression="&quot;Please choose a destination and trip length. Fare choices are displayed below:                                             (C1) Cairn One Way &#8211; 250    (C2) Cairn Return &#8211; 400     (S1) Sydney One Way &#8211; 420        (S2) Sydney Return - 575 (P1) Perth One Way &#8211; 510 (P2) Perth Return - 700&quot;" newline="True"/>
+            <input variable="userdestination"/>
+            <declare name="cost" type="Integer" array="False" size=""/>
+            <while expression="userdestination !=&quot;C1&quot; and userdestination !=&quot;c1&quot; and userdestination !=&quot;C2&quot; and userdestination !=&quot;c2&quot; and userdestination !=&quot;S1&quot; and userdestination !=&quot;S1&quot; and userdestination !=&quot;S2&quot; and userdestination !=&quot;s2&quot; and userdestination !=&quot;P1&quot; and userdestination !=&quot;p1&quot; and userdestination !=&quot;P2&quot; and userdestination !=&quot;p2&quot;">
+                <output expression="&quot;Please put into C1(c1), C2(c2), S1(s1), S2(s2), P1(p1) or P2(P2).&quot;" newline="True"/>
+                <input variable="userdestination"/>
+            </while>
+            <if expression="userdestination==&quot;C1&quot; or userdestination==&quot;c1&quot;">
+                <then>
+                    <output expression="&quot;You are going to order Cairn One Way. Costing is 250.&quot;" newline="True"/>
+                    <assign variable="userchoose" expression="&quot;Carms One Way&quot;"/>
+                </then>
+                <else>
+                    <if expression="userdestination==&quot;C2&quot; or userdestination==&quot;c2&quot;">
+                        <then>
+                            <output expression="&quot;You are going to order Cairn Return. Costing is 400.&quot;" newline="True"/>
+                            <assign variable="userchoose" expression="&quot;Carms Return&quot;"/>
+                        </then>
+                        <else>
+                            <if expression="userdestination==&quot;S1&quot; or userdestination==&quot;s1&quot;">
+                                <then>
+                                    <output expression="&quot;ou are going to order Sydney One Way. Costing is 420.&quot;" newline="True"/>
+                                    <assign variable="userchoose" expression="&quot;Sydney One Way&quot;"/>
+                                </then>
+                                <else>
+                                    <if expression="userdestination==&quot;S2&quot; or userdestination==&quot;s2&quot;">
+                                        <then>
+                                            <output expression="&quot;You are going to order Sydney Return.Costing is 575.&quot;" newline="True"/>
+                                            <assign variable="userchoose" expression="&quot;Sydney Return&quot;"/>
+                                        </then>
+                                        <else>
+                                            <if expression="userdestination==&quot;P1&quot; or userdestination==&quot;p1&quot;">
+                                                <then>
+                                                    <output expression="&quot;You are going to order Perth One Way. Costing is 510.&quot;" newline="True"/>
+                                                    <assign variable="userchoose" expression="&quot;Perth One Way&quot;"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="userdestination==&quot;P2&quot; or userdestination==&quot;p2&quot;">
+                                                        <then>
+                                                            <output expression="&quot;You are going to order Perth Return. Costing is 700.&quot;" newline="True"/>
+                                                            <assign variable="userchoose" expression="&quot;Perth Return&quot;"/>
+                                                        </then>
+                                                        <else/>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="doublecheck" type="String" variable="name">
+        <parameters>
+            <parameter name="name" type="String" array="False"/>
+        </parameters>
+        <body>
+            <output expression="&quot;Its purchase for yourself or another person      (Y or N)?&quot;" newline="True"/>
+            <declare name="Userchoose1" type="String" array="False" size=""/>
+            <input variable="Userchoose1"/>
+            <while expression="Userchoose1 != &quot;Y&quot; and Userchoose1 != &quot;y&quot; and Userchoose1 !=&quot;N&quot; and Userchoose1 !=&quot;n&quot;">
+                <output expression="&quot;Please put into Y or N&quot;" newline="True"/>
+                <input variable="Userchoose1"/>
+            </while>
+            <if expression="Userchoose1==&quot;Y&quot; or Userchoose1==&quot;y&quot;">
+                <then/>
+                <else>
+                    <output expression="&quot;Can you write down another person name?&quot;" newline="True"/>
+                    <input variable="name"/>
+                    <output expression="&quot;Welcome to the ordering systems &quot;&amp;name" newline="True"/>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="fare" type="String" variable="Userfare">
+        <parameters/>
+        <body>
+            <declare name="userfare" type="String" array="False" size=""/>
+            <output expression="&quot;(B)usiness - 275 (E)conomy - 25  (F)rugal - 0 &quot;" newline="True"/>
+            <input variable="userfare"/>
+            <declare name="fare" type="Integer" array="False" size=""/>
+            <while expression="userfare !=&quot;B&quot; and userfare !=&quot;b&quot; and userfare !=&quot;E&quot; and userfare !=&quot;e&quot; and userfare !=&quot;F&quot; and userfare !=&quot;f&quot;">
+                <output expression="&quot;Please put into E(e),F(f) or B(b).&quot;" newline="True"/>
+                <input variable="userfare"/>
+            </while>
+            <if expression="userfare==&quot;B&quot; or userfare==&quot;b&quot;">
+                <then>
+                    <output expression="&quot;You are going to order Business Fare. Costing is 275.&quot;" newline="True"/>
+                    <assign variable="Userfare" expression="&quot;Business Fare&quot;"/>
+                </then>
+                <else>
+                    <if expression="userfare==&quot;E&quot; or userfare==&quot;e&quot;">
+                        <then>
+                            <output expression="&quot;You are going to order Economy Fare. Costing is 25.&quot;" newline="True"/>
+                            <assign variable="Userfare" expression="&quot;Economy Fare&quot;"/>
+                        </then>
+                        <else>
+                            <if expression="userfare==&quot;F&quot; or userfare==&quot;f&quot;">
+                                <then>
+                                    <output expression="&quot;You are going to order Frugal Fare. Costing is 0.&quot;" newline="True"/>
+                                    <assign variable="Userfare" expression="&quot;Frugal Fare&quot;"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+    <function name="menu" type="String" variable="name">
+        <parameters/>
+        <body>
+            <declare name="name" type="String" array="False" size=""/>
+            <output expression="&quot;Welcome to the Tropical Airlines.&quot;" newline="True"/>
+            <output expression="&quot;Can you enter your name?&quot;" newline="True"/>
+            <input variable="name"/>
+            <output expression="&quot;Welcome to the ordering systems &quot;&amp;name" newline="True"/>
+            <output expression="&quot;(I)nformation, (O)rder ticket, (E)xit&quot;" newline="True"/>
+        </body>
+    </function>
+    <function name="seat" type="String" variable="Userseat">
+        <parameters/>
+        <body>
+            <declare name="userseat" type="String" array="False" size=""/>
+            <output expression="&quot;(W)indow - 75 (A)isle - 50 (M)idle - 25&quot;" newline="True"/>
+            <input variable="userseat"/>
+            <declare name="Userchoose" type="String" array="False" size=""/>
+            <declare name="seat" type="Integer" array="False" size=""/>
+            <while expression="userseat !=&quot;w&quot; and userseat !=&quot;W&quot; and userseat !=&quot;A&quot; and userseat !=&quot;a&quot; and userseat !=&quot;M&quot; and userseat !=&quot;m&quot;">
+                <output expression="&quot;Please put into W(w), A(a) or M(m).&quot;" newline="True"/>
+                <input variable="userseat"/>
+            </while>
+            <if expression="userseat==&quot;W&quot; or userseat==&quot;w&quot;">
+                <then>
+                    <output expression="&quot;You are going to order Window seat. Seat costing is 75.&quot;" newline="True"/>
+                    <assign variable="Userseat" expression="&quot;Window Seat&quot;"/>
+                </then>
+                <else>
+                    <if expression="userseat==&quot;A&quot; or userseat==&quot;a&quot;">
+                        <then>
+                            <output expression="&quot;You are going to order Aisle seat. Seat costing  is 50.&quot;" newline="True"/>
+                            <assign variable="Userseat" expression="&quot;Aisle Seat&quot;"/>
+                        </then>
+                        <else>
+                            <if expression="userseat==&quot;M&quot; or userseat==&quot;m&quot;">
+                                <then>
+                                    <output expression="&quot;You are going to order Midle seat. Seat costing is 25.&quot;" newline="True"/>
+                                    <assign variable="Userseat" expression="&quot;Middle Seat&quot;"/>
+                                </then>
+                                <else/>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
